@@ -1,8 +1,14 @@
 // import node module libraries
 import Link from "next/link";
 import { Col, Row, Image } from "react-bootstrap";
+import { getUserCookie } from 'utils/auth'
 
 const ProfileHeader = () => {
+  const user = getUserCookie();
+    const gmail = user.email;
+    const phone = user.phone;
+    const name = user.name;
+    const username = user.username;
   return (
     <Row className="align-items-center">
       <Col xl={12} lg={12} md={12} xs={12}>
@@ -20,7 +26,7 @@ const ProfileHeader = () => {
               {/* avatar */}
               <div className="avatar-xxl avatar-indicators avatar-online me-2 position-relative d-flex justify-content-end align-items-end mt-n10">
                 <Image
-                  src="/images/avatar/avatar-1.jpg"
+                  src="/images/avatar/user.png"
                   className="avatar-xxl rounded-circle border border-4 border-white-color-40"
                   alt=""
                 />
@@ -43,7 +49,7 @@ const ProfileHeader = () => {
               {/* text */}
               <div className="lh-1">
                 <h2 className="mb-0">
-                  Jitu Chauhan
+                  {name}
                   <Link
                     href="#!"
                     className="text-decoration-none"
@@ -53,7 +59,7 @@ const ProfileHeader = () => {
                     data-original-title="Beginner"
                   ></Link>
                 </h2>
-                <p className="mb-0 d-block">@imjituchauhan</p>
+                <p className="mb-0 d-block">@{username}</p>
               </div>
             </div>
             <div>
@@ -67,36 +73,7 @@ const ProfileHeader = () => {
           </div>
           {/* nav */}
           <ul className="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
-            <li className="nav-item">
-              <Link className="nav-link active" href="#">
-                Overview
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="#">
-                Project
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="#">
-                Files
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="#">
-                Teams
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="#">
-                Followers
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" href="#">
-                Activity
-              </Link>
-            </li>
+            
           </ul>
         </div>
       </Col>

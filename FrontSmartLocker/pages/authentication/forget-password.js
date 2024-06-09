@@ -1,11 +1,39 @@
 // import node module libraries
 import { Row, Col, Card, Form, Button, Image } from "react-bootstrap";
 import Link from "next/link";
+import axios from 'axios';
+import config from 'next.config';
 
 // import authlayout to override default layout
 import AuthLayout from "layouts/AuthLayout";
-
+import { withAuthRedirect } from 'utils/withAuthRedirect';
+import {getUserCookie} from 'utils/auth'
+import { useRouter } from "next/router";
 const ForgetPassword = () => {
+  const router = useRouter();
+  const user = getUserCookie();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    // Lấy giá trị email từ trường mẫu
+    const email = e.target.email.value;
+  
+    try {
+      // Gọi API gửi email từ máy chủ của bạn
+      const response = await axios.post(`${config.baseURL}/api/user/forgot-password`, { 'mail': email, });
+  
+      if (response.status === 200) {
+        
+        console.log('Email gửi thành công!');
+        router.push('/authentication/confirm-otp-email')
+      }
+    } catch (error) {
+      console.error('Gửi email thất bại:', error);
+      // Có thể hiển thị thông báo lỗi cho người dùng ở đây
+    }
+  };
+  
   return (
     <Row className="align-items-center justify-content-center g-0 min-vh-100">
       <Col xxl={4} lg={6} md={8} xs={12} className="py-8 py-xl-0">
@@ -22,30 +50,29 @@ const ForgetPassword = () => {
                 />
               </Link>
               <p className="mb-6">
-                Don&apos;t worry, we&apos;ll send you an email to reset your
-                password.
+                Đừng lo, chúng tôi sẽ gửi email của bạn để lấy lại mật khẩu.
               </p>
             </div>
             {/* Form */}
-            <Form>
+            <Form onSubmit={handleSubmit}>
               {/* Email */}
               <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
                   name="email"
-                  placeholder="Enter Your Email"
+                  placeholder="vhuunghia@gmail.com"
                 />
               </Form.Group>
               {/* Button */}
               <div className="mb-3 d-grid">
                 <Button variant="primary" type="submit">
-                  Reset Password
+                  Lấy lại mật khẩu
                 </Button>
               </div>
               <span>
-                Don&apos;t have an account?{" "}
-                <Link href="/authentication/sign-in">Sign In</Link>
+                Bạn đã có tài khoản?{" "}
+                <Link href="/authentication/sign-in">Đăng nhập</Link>
               </span>
             </Form>
           </Card.Body>
@@ -58,3 +85,4 @@ const ForgetPassword = () => {
 ForgetPassword.Layout = AuthLayout;
 
 export default ForgetPassword;
+//export default withAuthRedirect(ForgetPassword);
