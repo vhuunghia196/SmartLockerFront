@@ -12,8 +12,7 @@ import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';
 import { AuthProvider } from 'context/AuthContext';
 
 import { getUserCookie } from 'utils/auth'
-
-
+import '../styles/theme/components/order-list.scss';
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const pageURL = process.env.baseURL + router.pathname;
