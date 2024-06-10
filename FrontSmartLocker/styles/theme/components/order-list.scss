@@ -1,0 +1,18 @@
+$order-table-border-color: #dee2e6;
+
+.order-table-list {
+  th, td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+
+  td {
+    border: 1px solid $order-table-border-color;
+  }
+}
