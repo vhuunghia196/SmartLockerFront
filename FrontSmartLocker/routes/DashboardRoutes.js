@@ -55,7 +55,8 @@ export const DashboardMenu = [
 		title: 'Thống kê',
 		icon: 'corner-left-down',
 		children: [
-			{ id: uuid(), link: '/components/ChartUsingLocker', name: 'Số lượng sử dụng tủ' },
+			{ id: uuid(), link: '/components/ChartUsingLocker', name: 'Số lần sử dụng tủ' },
+			{ id: uuid(), link: '/components/ChartLogin', name: 'Số lần đăng nhập' },
 		]
 	},	
 	{
