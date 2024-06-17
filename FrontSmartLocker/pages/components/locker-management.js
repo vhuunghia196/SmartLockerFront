@@ -154,7 +154,7 @@ import React, { useEffect, useState } from 'react';
 import { Col, Row, Card, Tab, Container, Table, Button, Modal, Form } from 'react-bootstrap';
 import axios from 'axios';
 import config from 'next.config';
-import  {getTokenCookie}  from 'utils/auth';
+import { getTokenCookie } from 'utils/auth';
 import Notification from 'utils/alert';
 const LockerManagement = () => {
     const [lockers, setLockers] = useState([]);
@@ -163,9 +163,9 @@ const LockerManagement = () => {
     const [selectedLocation, setSelectedLocation] = useState('');
     const [currentLocker, setCurrentLocker] = useState(null);
     const [lockerToDelete, setLockerToDelete] = useState(null);
+    const [lockerAdd, setLockerAdd] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showAddModal, setShowAddModal] = useState(false);
-    const [newLockerName, setNewLockerName] = useState('');
     const [notificationMessage, setNotificationMessage] = useState('');
     const token = getTokenCookie();
 
@@ -208,15 +208,18 @@ const LockerManagement = () => {
 
     const closeAddModal = () => {
         setShowAddModal(false);
-        setNewLockerName('');
         setSelectedLocation('');
     };
 
     const handleSaveLocker = async () => {
         try {
-            const response = await axios.post(`${config.baseURL}/api/locker`, {
-                lockerName: newLockerName,
-                locationId: selectedLocation
+            const response = await axios.post(`${config.baseURL}/api/locker/add`, {
+                "lockerName": lockerAdd.lockerName,
+                "isOccupied": false,
+                "lockerLocation": {
+                    "locationId": lockerAdd.lockerLocation.locationId,
+                    "location": lockerAdd.lockerLocation.location
+                }
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -225,7 +228,7 @@ const LockerManagement = () => {
             const result = response.data;
 
             if (result.status === "OK") {
-                setLockers([...lockers, result.data]);
+                setLockers([...lockers, lockerAdd]);
             }
         } catch (error) {
             console.error('Error adding locker:', error);
@@ -270,7 +273,7 @@ const LockerManagement = () => {
         if (!currentLocker || !currentLocker.lockerName || !currentLocker.lockerLocation?.locationId) {
             setNotificationMessage('Vui lòng điền đầy đủ thông tin tên tủ và chọn vị trí.');
             return;
-          }
+        }
         console.log(currentLocker)
         try {
             const response = await axios.put(`${config.baseURL}/api/locker/${currentLocker.lockerId}`, {
@@ -297,7 +300,7 @@ const LockerManagement = () => {
                 }
             }
         } catch (error) {
-            
+
             console.error('Error updating locker:', error);
         }
         setShowModal(false);
@@ -382,14 +385,12 @@ const LockerManagement = () => {
                                 value={selectedLocation}
                                 onChange={(e) => {
                                     const locationId = e.target.value;
-                                    console.log(locationId)
-                                    console.log(locations)
-                                    const selectedLocationObj = locations.find(location => String(location.locationId) === String(locationId));                                    console.log(selectedLocationObj)
+                                    const selectedLocationObj = locations.find(location => String(location.locationId) === String(locationId));
                                     setCurrentLocker({
                                         ...currentLocker,
                                         lockerLocation: {
                                             locationId: locationId,
-                                            location: selectedLocationObj ? selectedLocationObj.location : '' // Nếu không tìm thấy selectedLocationObj, có thể xử lý tùy vào trường hợp thực tế của bạn
+                                            location: selectedLocationObj ? selectedLocationObj.location : ''
                                         }
                                     });
                                     setSelectedLocation(locationId);
@@ -434,14 +435,28 @@ const LockerManagement = () => {
                             <Form.Label>Tên tủ</Form.Label>
                             <Form.Control
                                 type="text"
-                                value={newLockerName}
-                                onChange={(e) => setNewLockerName(e.target.value)}
+                                value={lockerAdd?.lockerName || ''}
+                                onChange={(e) => setLockerAdd({ ...lockerAdd, lockerName: e.target.value })}
                                 placeholder="Nhập tên tủ"
                             />
+
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formNewLockerLocation">
                             <Form.Label>Vị trí</Form.Label>
-                            <Form.Select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)}>
+                            <Form.Select value={selectedLocation} onChange={(e) => {
+                                const locationId = e.target.value;
+                                const selectedLocationObj = locations.find(location => String(location.locationId) === String(locationId));
+                                console.log(selectedLocationObj)
+                                setLockerAdd({
+                                    ...lockerAdd,
+                                    lockerLocation: {
+                                        locationId: locationId,
+                                        location: selectedLocationObj ? selectedLocationObj.location : ''
+                                    }
+                                })
+                                setSelectedLocation(locationId);
+                            }}
+                            >
                                 <option value="">Chọn địa điểm</option>
                                 {locations.map((location) => (
                                     <option key={location.locationId} value={location.locationId}>
