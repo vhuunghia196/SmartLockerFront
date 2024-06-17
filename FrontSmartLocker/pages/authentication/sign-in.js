@@ -7,7 +7,6 @@ import axios from 'axios';
 import config from 'next.config';
 import { useAuth } from 'context/AuthContext'
 import {setAllAuthCookies} from 'utils/auth'
-import { withAuthRedirect } from 'utils/withAuthRedirect';
 
 
 

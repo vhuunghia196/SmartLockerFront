@@ -10,7 +10,7 @@ const UserManagement = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${config.baseURL}/api/user/all`); 
+        const response = await axios.get(`${config.baseURL}/api/user/all`);
         const result = response.data;
 
         if (result.status === "OK") {
@@ -48,43 +48,43 @@ const UserManagement = () => {
             <h3>Danh sách người dùng</h3>
           </div>
           <Tab.Container defaultActiveKey="all">
-           
-              <Card.Body className="p-0">
-                <Tab.Content>
-                  <Tab.Pane eventKey="all" className="pb-4 p-4">
-                    <Table striped bordered hover>
-                      <thead>
-                        <tr>
-                          <th>STT</th>
-                          <th>Tên</th>
-						  <th>Username</th>
-                          <th>Email</th>
-						  <th>SĐT</th>
-                          <th>Vai trò</th>
-                          <th>Hành động</th>
+
+            <Card.Body className="p-0">
+              <Tab.Content>
+                <Tab.Pane eventKey="all" className="pb-4 p-4">
+                  <Table striped bordered hover className='user-table-list'>
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>SĐT</th>
+                        <th>Vai trò</th>
+                        <th>Hành động</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {users.map((user, index) => (
+                        <tr key={user.id}>
+                          <td>{index + 1}</td>
+                          <td>{user.name}</td>
+                          <td>{user.username}</td>
+                          <td>{user.email}</td>
+                          <td>{user.phone.replace('+84', '0')}</td>
+                          <td>{user.roles.join(', ')}</td>
+                          <td>
+                            <Button variant="primary" size="sm" className="me-2">Chỉnh sửa</Button>
+                            <Button variant="danger" size="sm">Xóa</Button>
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {users.map((user, index) => (
-                          <tr key={user.id}>
-                            <td>{index + 1}</td>
-                            <td>{user.name}</td>
-							<td>{user.username}</td>
-                            <td>{user.email}</td>
-							<td>{user.phone.replace('+84', '0')}</td>
-                            <td>{user.roles.join(', ')}</td>
-                            <td>
-                              <Button variant="primary" size="sm" className="me-2">Chỉnh sửa</Button>
-                              <Button variant="danger" size="sm">Xóa</Button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </Table>
-                    <Button variant="success" className="mt-3">Thêm người dùng mới</Button>
-                  </Tab.Pane>
-                </Tab.Content>
-              </Card.Body>
+                      ))}
+                    </tbody>
+                  </Table>
+                  <Button variant="success" className="mt-3">Thêm người dùng mới</Button>
+                </Tab.Pane>
+              </Tab.Content>
+            </Card.Body>
           </Tab.Container>
         </Col>
       </Row>

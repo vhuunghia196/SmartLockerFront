@@ -9,10 +9,13 @@ $order-table-border-color: #dee2e6;
 
   th {
     background-color: #f8f9fa;
-    font-weight: bold;
+    font-weight: bolder !important;
   }
 
   td {
     border: 1px solid $order-table-border-color;
   }
+}
+.order-table-list tbody tr:hover {
+  background-color: #abe3de; 
 }

@@ -12,7 +12,13 @@ import DefaultDashboardLayout from 'layouts/DefaultDashboardLayout';
 import { AuthProvider } from 'context/AuthContext';
 
 import { getUserCookie } from 'utils/auth'
+//css
 import '../styles/theme/components/order-list.scss';
+import '../styles/theme/components/LockerManagement.scss';
+import '../styles/theme/components/user.scss';
+import '../styles/theme/components/location.scss';
+import '../styles/theme/components/RecordUsingLockerChart.module.scss';
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const pageURL = process.env.baseURL + router.pathname;

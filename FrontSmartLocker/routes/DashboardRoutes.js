@@ -46,6 +46,8 @@ export const DashboardMenu = [
 		children: [
 			{ id: uuid(), link: '/components/order-list', name: 'Đơn hàng' },
 			{ id: uuid(), link: '/components/user-management', name: 'Người dùng' },
+			{ id: uuid(), link: '/components/locker-management', name: 'Tủ' },
+			{ id: uuid(), link: '/components/location-management', name: 'Địa điểm' },
 		]
 	},	
 	{
@@ -53,32 +55,7 @@ export const DashboardMenu = [
 		title: 'Thống kê',
 		icon: 'corner-left-down',
 		children: [
-			{ 
-				id: uuid(), 
-				link: '#', 
-				title: 'Two Level',
-				children: [
-					{ id: uuid(), link: '#', name: 'NavItem 1'},
-					{ id: uuid(), link: '#', name: 'NavItem 2' }
-				]
-			},
-			{ 
-				id: uuid(), 
-				link: '#', 
-				title: 'Three Level',
-				children: [
-					{ 
-						id: uuid(), 
-						link: '#', 
-						title: 'NavItem 1',
-						children: [
-							{ id: uuid(), link: '#', name: 'NavChildItem 1'},
-							{ id: uuid(), link: '#', name: 'NavChildItem 2'}
-						]
-					},
-					{ id: uuid(), link: '#', name: 'NavItem 2' }
-				]
-			}
+			{ id: uuid(), link: '/components/ChartUsingLocker', name: 'Số lượng sử dụng tủ' },
 		]
 	},	
 	{

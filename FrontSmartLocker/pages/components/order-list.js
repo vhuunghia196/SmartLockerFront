@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from 'next.config';
+import { getTokenCookie } from 'utils/auth';
 import { Col, Row, Card, Breadcrumb, Nav, Tab, Container, Table, Button } from 'react-bootstrap';
+
 const OrdersList = () => {
   const [orders, setOrders] = useState([]);
+  const token = getTokenCookie();
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`${config.baseURL}/api/locker/history/all`);
+        const response = await axios.get(`${config.baseURL}/api/history/all`,
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+
         const data = response.data.data;
         const groupedOrders = groupOrders(data);
 
@@ -123,11 +133,10 @@ const OrdersList = () => {
                                   </td>
                                 </>
                               )}
-                              {orderIndex === 0 && orderList.length === 2 && (
-                                <td rowSpan={orderList.length} className="text-center">Đã hoàn thành</td>
-                              )}
-                              {orderIndex === 0 && orderList.length === 1 && (
-                                <td rowSpan={orderList.length} className="text-center">Chưa hoàn thành</td>
+                              {orderIndex === 0 && (
+                                <td rowSpan={orderList.length} className="text-center">
+                                  {orderList.length === 2 ? 'Đã hoàn thành' : 'Chưa hoàn thành'}
+                                </td>
                               )}
                             </tr>
                           ))}
