@@ -4,9 +4,9 @@ import { getUserCookie } from 'utils/auth'
 
 const AboutMe = () => {
     const user = getUserCookie();
-    const gmail = user.email;
-    const phone = user.phone;
-    const name = user.name;
+    const gmail = user?.email;
+    const phone = user?.phone;
+    const name = user?.name;
     return (
 
             <Card>

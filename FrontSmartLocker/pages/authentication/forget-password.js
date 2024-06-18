@@ -6,7 +6,6 @@ import config from 'next.config';
 
 // import authlayout to override default layout
 import AuthLayout from "layouts/AuthLayout";
-import { withAuthRedirect } from 'utils/withAuthRedirect';
 import {getUserCookie} from 'utils/auth'
 import { useRouter } from "next/router";
 const ForgetPassword = () => {
