@@ -7,7 +7,6 @@ import { useState } from "react";
 
 // import authlayout to override default layout
 import AuthLayout from "layouts/AuthLayout";
-import { withAuthRedirect } from 'utils/withAuthRedirect';
 import { getTokenCookie } from 'utils/auth';
 import { useRouter } from "next/router";
 

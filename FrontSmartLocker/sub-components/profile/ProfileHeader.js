@@ -5,10 +5,8 @@ import { getUserCookie } from 'utils/auth'
 
 const ProfileHeader = () => {
   const user = getUserCookie();
-    const gmail = user.email;
-    const phone = user.phone;
-    const name = user.name;
-    const username = user.username;
+    const name = user?.name;
+    const username = user?.username;
   return (
     <Row className="align-items-center">
       <Col xl={12} lg={12} md={12} xs={12}>

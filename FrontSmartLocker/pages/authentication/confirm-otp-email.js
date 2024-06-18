@@ -5,7 +5,6 @@ import axios from 'axios';
 
 // import authlayout to override default layout
 import AuthLayout from "layouts/AuthLayout";
-import { withAuthRedirect } from 'utils/withAuthRedirect';
 import { getUserCookie } from 'utils/auth'
 import { useRouter } from "next/router";
 import config from 'next.config';

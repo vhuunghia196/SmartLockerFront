@@ -13,9 +13,9 @@ const ChartUsingLocker = () => {
   const token = getTokenCookie();
 
   const chartUsingLockerData = async () => {
-    const end = formatDate(endDate);
-    const start = formatDate(startDate);
-
+    const end = formatDateForAPI(endDate);
+    const start = formatDateForAPI(startDate);
+    console.log(end)
     try {
       const response = await axios.get(`${config.baseURL}/api/history/record`, {
         params: {
@@ -37,12 +37,13 @@ const ChartUsingLocker = () => {
     chartUsingLockerData();
   };
 
-  const formatDate = (date) => {
+  const formatDateForAPI = (date) => {
     if (!date) return ''; // Trường hợp không có ngày được chọn
-
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
-    const year = date.getFullYear();
+    var dateFormat = new Date(date);
+    dateFormat.setDate(dateFormat.getDate() + 1);
+    const day = String(dateFormat.getDate()).padStart(2, '0');
+    const month = String(dateFormat.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+    const year = dateFormat.getFullYear();
     return `${day}-${month}-${year}`;
   };
 
