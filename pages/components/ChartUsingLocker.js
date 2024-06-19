@@ -17,7 +17,7 @@ const ChartUsingLocker = () => {
     const start = formatDateForAPI(startDate);
     console.log(end)
     try {
-      const response = await axios.get(`${config.baseURL}/api/history/record`, {
+      const response = await axios.get(`${process.env.BASE_URL}/api/history/record`, {
         params: {
           startDate: start,
           endDate: end,

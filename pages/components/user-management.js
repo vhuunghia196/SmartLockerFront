@@ -164,7 +164,7 @@ const UserManagement = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${config.baseURL}/api/user/all`);
+        const response = await axios.get(`${process.env.BASE_URL}/api/user/all`);
         const result = response.data;
 
         if (result.status === "OK") {
@@ -197,7 +197,7 @@ const UserManagement = () => {
 
     try {
       const response = await axios.post(
-        `${config.baseURL}/api/user/admin/role/add/${selectedUser.id}/${selectedRole}`,
+        `${process.env.BASE_URL}/api/user/admin/role/add/${selectedUser.id}/${selectedRole}`,
         {},
         {
           headers: {

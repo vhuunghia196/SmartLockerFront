@@ -16,7 +16,7 @@ const LocationManagement = () => {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await axios.get(`${config.baseURL}/api/location/all`);
+        const response = await axios.get(`${process.env.BASE_URL}/api/location/all`);
         const result = response.data;
 
         if (result.status === "OK") {

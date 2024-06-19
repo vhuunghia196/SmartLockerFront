@@ -31,7 +31,7 @@ const ChangePassword = () => {
     try {
       // Gọi API thay đổi mật khẩu từ máy chủ của bạn
       const response = await axios.post(
-        `${config.baseURL}/api/user/change-password`,
+        `${process.env.BASE_URL}/api/user/change-password`,
         {
           oldPass: oldPassword,
           newPass: newPassword

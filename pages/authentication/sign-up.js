@@ -381,7 +381,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        `${config.baseURL}/api/auth/signup`,
+        `${process.env.BASE_URL}/api/auth/signup`,
         {
           'name': fullName,
           'password': password,
