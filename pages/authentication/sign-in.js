@@ -45,7 +45,7 @@ const SignIn = () => {
     setError('');
     setLoading(true);
     try {
-      const response = await axios.post(`${config.baseURL}/api/auth/login`, {
+      const response = await axios.post(`${process.env.BASE_URL}/api/auth/login`, {
         usernameOrEmail: username,
         password: password,
       });

@@ -178,7 +178,7 @@ const LockerManagement = () => {
 
     const fetchLocations = async () => {
         try {
-            const response = await axios.get(`${config.baseURL}/api/location/all`);
+            const response = await axios.get(`${process.env.BASE_URL}/api/location/all`);
             const result = response.data;
 
             if (result.status === "OK") {
@@ -191,7 +191,7 @@ const LockerManagement = () => {
 
     const fetchLockers = async () => {
         try {
-            const response = await axios.get(`${config.baseURL}/api/locker/all`);
+            const response = await axios.get(`${process.env.BASE_URL}/api/locker/all`);
             const result = response.data;
 
             if (result.status === "OK") {
@@ -213,7 +213,7 @@ const LockerManagement = () => {
 
     const handleSaveLocker = async () => {
         try {
-            const response = await axios.post(`${config.baseURL}/api/locker/add`, {
+            const response = await axios.post(`${process.env.BASE_URL}/api/locker/add`, {
                 "lockerName": lockerAdd.lockerName,
                 "isOccupied": false,
                 "lockerLocation": {
@@ -252,7 +252,7 @@ const LockerManagement = () => {
         if (!lockerToDelete) return;
 
         try {
-            const response = await axios.delete(`${config.baseURL}/api/locker/${lockerToDelete.lockerId}`, {
+            const response = await axios.delete(`${process.env.BASE_URL}/api/locker/${lockerToDelete.lockerId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -276,7 +276,7 @@ const LockerManagement = () => {
         }
         console.log(currentLocker)
         try {
-            const response = await axios.put(`${config.baseURL}/api/locker/${currentLocker.lockerId}`, {
+            const response = await axios.put(`${process.env.BASE_URL}/api/locker/${currentLocker.lockerId}`, {
                 "lockerName": currentLocker.lockerName,
                 "isOccupied": currentLocker.isOccupied,
                 "lockerLocation": {

@@ -109,7 +109,7 @@ const ChartLogin = () => {
     const start = formatDateForAPI(startDate);
     console.log(end);
     try {
-      const response = await axios.get(`${config.baseURL}/api/user/record`, {
+      const response = await axios.get(`${process.env.BASE_URL}/api/user/record`, {
         params: {
           startDate: start,
           endDate: end,

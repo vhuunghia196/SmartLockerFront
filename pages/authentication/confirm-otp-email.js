@@ -21,7 +21,7 @@ const ConfirmOTPEmail = () => {
       
         try {
           // Gọi API kiểm tra mã OTP từ máy chủ của bạn
-          const response = await axios.post(`${config.baseURL}/api/user/forgot-password/confirm`, { 'otp': otp });
+          const response = await axios.post(`${process.env.BASE_URL}/api/user/forgot-password/confirm`, { 'otp': otp });
       
           if (response.status === 200) {
             // Xử lý thành công
