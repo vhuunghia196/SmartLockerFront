@@ -20,7 +20,7 @@ const ForgetPassword = () => {
   
     try {
       // Gọi API gửi email từ máy chủ của bạn
-      const response = await axios.post(`${config.baseURL}/api/user/forgot-password`, { 'mail': email, });
+      const response = await axios.post(`${process.env.BASE_URL}/api/user/forgot-password`, { 'mail': email, });
   
       if (response.status === 200) {
         

@@ -10,7 +10,7 @@ const OrdersList = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`${config.baseURL}/api/history/all`,
+        const response = await axios.get(`${process.env.BASE_URL}/api/history/all`,
           {
             headers: {
               'Authorization': `Bearer ${token}`
