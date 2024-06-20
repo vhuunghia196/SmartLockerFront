@@ -27,6 +27,8 @@ const RecordLoginChart = ({ userData }) => {
               backgroundColor: 'rgba(153, 102, 255, 0.2)',
               borderColor: 'rgba(153, 102, 255, 1)',
               borderWidth: 1,
+              barPercentage: 0.6, // Adjust this value to make the bars narrower
+              categoryPercentage: 0.6, // Adjust this value to make the bars narrower
             },
           ],
         },
