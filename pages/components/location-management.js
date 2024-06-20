@@ -42,7 +42,7 @@ const LocationManagement = () => {
     if (!locationToDelete) return;
 
     try {
-      const response = await axios.delete(`${config.baseURL}/api/location/${locationToDelete.locationId}`, {
+      const response = await axios.delete(`${process.env.BASE_URL}/api/location/${locationToDelete.locationId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -62,7 +62,7 @@ const LocationManagement = () => {
   const handleCloseDeleteModal = () => setShowDeleteModal(false);
   const handleSave = async (location) => {
     try {
-      const response = await axios.put(`${config.baseURL}/api/location/${location.locationId}`, {
+      const response = await axios.put(`${process.env.BASE_URL}/api/location/${location.locationId}`, {
         locationId: location.locationId,
         location: location.location
       },
@@ -87,7 +87,7 @@ const LocationManagement = () => {
   const handleCloseAddModal = () => setShowAddModal(false);
   const handleAddLocation = async () => {
     try {
-      const response = await axios.post(`${config.baseURL}/api/location/add`, {
+      const response = await axios.post(`${process.env.BASE_URL}/api/location/add`, {
         location: newLocation
       }, {
         headers: {

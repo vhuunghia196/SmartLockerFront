@@ -13,15 +13,17 @@ import {
   ProjectsContributions,
   RecentFromBlog
 } from 'sub-components'
+import { getUserCookie } from   'utils/auth'
 
 const Profile = () => {
+  const user = getUserCookie();
   return (
     <Container fluid className="p-6">
       {/* Page Heading */}
       <PageHeading heading="Tổng quan"/>
 
       {/* Profile Header  */}
-      <ProfileHeader />
+      <ProfileHeader user={user} />
 
       {/* content */}
       <div className="py-6">
