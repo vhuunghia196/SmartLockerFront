@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RecordUsingLockerChart from '../Chart/RecordUsingLockerChart';
 import DatePicker from 'react-datepicker';
@@ -6,21 +7,22 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Button } from 'react-bootstrap';
 import config from 'next.config';
 import { getTokenCookie } from 'utils/auth';
+
 const ChartUsingLocker = () => {
   const [statisticsData, setStatisticsData] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const token = getTokenCookie();
 
-  const chartUsingLockerData = async () => {
-    const end = formatDateForAPI(endDate);
-    const start = formatDateForAPI(startDate);
-    console.log(end)
+  const chartUsingLockerData = async (start, end) => {
+    const startDate = formatDateForAPI(start);
+    const endDate = formatDateForAPI(end);
+
     try {
       const response = await axios.get(`${process.env.BASE_URL}/api/history/record`, {
         params: {
-          startDate: start,
-          endDate: end,
+          startDate: startDate,
+          endDate: endDate,
         },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -34,7 +36,7 @@ const ChartUsingLocker = () => {
   };
 
   const handleStatistics = () => {
-    chartUsingLockerData();
+    chartUsingLockerData(startDate, endDate);
   };
 
   const formatDateForAPI = (date) => {
@@ -47,11 +49,26 @@ const ChartUsingLocker = () => {
     return `${day}-${month}-${year}`;
   };
 
+  const getDefaultDateRange = () => {
+    const today = new Date();
+    const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+    return { start: firstDayOfMonth, end: lastDayOfMonth };
+  };
+
+  useEffect(() => {
+    const { start, end } = getDefaultDateRange();
+    setStartDate(start);
+    setEndDate(end);
+    chartUsingLockerData(start, end);
+  }, []);
+
   return (
     <div className="chartContainer">
       <h1 className="chartHeader">Biểu đồ thống kê số lượng sử dụng tủ</h1>
 
-      <div className="datePickerContainer" style={{display: "flex"}}>
+      <div className="datePickerContainer" style={{ display: "flex" }}>
         <div>
           <label>Ngày bắt đầu: </label>
           <DatePicker
@@ -74,10 +91,10 @@ const ChartUsingLocker = () => {
           />
         </div>
         <div className="buttonContainer">
-        <Button variant="primary" onClick={handleStatistics}>
-          Thống kê
-        </Button>
-      </div>
+          <Button variant="primary" onClick={handleStatistics}>
+            Thống kê
+          </Button>
+        </div>
       </div>
 
       {statisticsData && (
@@ -91,4 +108,3 @@ const ChartUsingLocker = () => {
 };
 
 export default ChartUsingLocker;
-

@@ -28,22 +28,18 @@ const Home = () => {
                             </div>
                         </div>
                     </Col>
-                    {ProjectsStatsData.map((item, index) => {
+                    {/* {ProjectsStatsData.map((item, index) => {
                         return (
                             <Col xl={3} lg={6} md={12} xs={12} className="mt-6" key={index}>
                                 <StatRightTopIcon info={item} />
                             </Col>
                         )
-                    })}
+                    })} */}
+                    <ProjectsStatsData/>
                 </Row>
 
                 <Row className="my-6">
-                    <Col xl={4} lg={12} md={12} xs={12} className="mb-6 mb-xl-0">
-
-                        {/* Tasks Performance  */}
-                        <TasksPerformance />
-
-                    </Col>
+                    
                     {/* card  */}
                     <Col xl={8} lg={12} md={12} xs={12}>
 
