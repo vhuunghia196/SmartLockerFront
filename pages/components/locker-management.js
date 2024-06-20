@@ -645,7 +645,9 @@ const LockerManagement = () => {
                     Authorization: `Bearer ${token}`
                 }
             });
+            
             const result = response.data;
+            console.log(result)
             if (result.status === "OK") {
                 const index = lockers.findIndex(locker => locker.lockerId === currentLocker.lockerId);
                 if (index !== -1) {
@@ -655,7 +657,7 @@ const LockerManagement = () => {
                     setError('');
                 }
             } else {
-                setError('Failed to update locker');
+                setError('');
             }
         } catch (error) {
             setError('Error updating locker: ' + error.message);
@@ -757,6 +759,14 @@ const LockerManagement = () => {
                                     <option key={location.locationId} value={location.locationId}>{location.location}</option>
                                 ))}
                             </Form.Select>
+                            <Form.Group className="mb-3" controlId="formEditLockerStatus">
+                                <Form.Check
+                                    type="checkbox"
+                                    label="Đang sử dụng"
+                                    checked={currentLocker?.isOccupied || false}
+                                    onChange={(e) => setCurrentLocker({ ...currentLocker, isOccupied: e.target.checked })}
+                                />
+                            </Form.Group>
                             {notificationMessage && (
                                 <Notification message={notificationMessage} />
                             )}
