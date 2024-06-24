@@ -77,7 +77,7 @@ const ChartLogin = () => {
       <h1 className="chartHeader">Biểu đồ thống kê số lượng đăng nhập của người dùng</h1>
 
       <div className="datePickerContainer" style={{ display: "flex" }}>
-        <div>
+        <div style={{marginRight: 20, }}>
           <label>Ngày bắt đầu: </label>
           <DatePicker
             selected={startDate}
@@ -88,7 +88,7 @@ const ChartLogin = () => {
           />
         </div>
 
-        <div>
+        <div style={{marginRight: 20}}>
           <label>Ngày kết thúc: </label>
           <DatePicker
             selected={endDate}

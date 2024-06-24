@@ -69,7 +69,7 @@ const ChartUsingLocker = () => {
       <h1 className="chartHeader">Biểu đồ thống kê số lượng sử dụng tủ</h1>
 
       <div className="datePickerContainer" style={{ display: "flex" }}>
-        <div>
+        <div style={{marginRight: 20}}>
           <label>Ngày bắt đầu: </label>
           <DatePicker
             selected={startDate}
@@ -80,7 +80,7 @@ const ChartUsingLocker = () => {
           />
         </div>
 
-        <div>
+        <div style={{marginRight: 20}}>
           <label>Ngày kết thúc: </label>
           <DatePicker
             selected={endDate}
